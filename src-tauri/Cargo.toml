@@ -1,9 +1,9 @@
 [package]
 name = "porgqr"
 version = "0.1.0"
-description = "A Tauri App"
-authors = ["you"]
-edition = "2021"
+description = "App for PorgUNC"
+authors = ["Vikram Krishnakumar"]
+edition = "2026"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
