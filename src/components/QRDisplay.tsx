@@ -241,7 +241,7 @@ export function QRDisplay({ poll, onBack }: QRDisplayProps) {
             </div>
             <div className="qr-info">
               <p className="token-display">
-                Token: {isVisible ? currentToken : '••••••'}
+                Token: {isVisible ? currentToken : '••••••••••'}
               </p>
               <p className="timer">Refreshing in {timeRemaining}s</p>
               <p className="poll-id">Poll ID: {poll.pollId}</p>

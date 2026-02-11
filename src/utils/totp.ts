@@ -5,7 +5,7 @@ export function generateTotpPublic(secret: string, period: number = 10): string 
     issuer: 'PorgUNC',
     label: 'Poll',
     algorithm: 'SHA1',
-    digits: 6,
+    digits: 10,
     period: period,
     secret: secret,
   });
