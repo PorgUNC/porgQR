@@ -4,7 +4,7 @@ export function generateTotpPublic(secret: string, period: number = 10): string 
   const totp = new TOTP({
     issuer: 'PorgUNC',
     label: 'Poll',
-    algorithm: 'SHA1',
+    algorithm: 'SHA512',
     digits: 10,
     period: period,
     secret: secret,
