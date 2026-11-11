@@ -8,6 +8,7 @@ COPY package*.json ./
 COPY pnpm*.yaml ./
 
 # If using pnpm, yarn, or bun, adapt the install command accordingly:
+RUN npm install -g pnpm
 RUN pnpm ci
 
 # Copy the rest of the frontend/project source
