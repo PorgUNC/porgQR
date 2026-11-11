@@ -3,6 +3,8 @@ import QRCode from 'qrcode';
 import { Poll } from '../types';
 import { generateTotpPublic } from '../utils/totp';
 
+const REFRESH_INTERVAL_SECONDS = 10;
+
 interface QRDisplayProps {
   poll: Poll;
   onBack: () => void;
@@ -11,7 +13,7 @@ interface QRDisplayProps {
 export function QRDisplay({ poll, onBack }: QRDisplayProps) {
   const [qrCodeUrl, setQrCodeUrl] = useState<string>('');
   const [currentToken, setCurrentToken] = useState<string>('');
-  const [timeRemaining, setTimeRemaining] = useState<number>(10);
+  const [timeRemaining, setTimeRemaining] = useState<number>(REFRESH_INTERVAL_SECONDS);
   const [isVisible, setIsVisible] = useState<boolean>(true);
   const [zoomLevel, setZoomLevel] = useState<number>(1); // 1 = 100%, 0.5 = 50%, 2 = 200%, etc.
 
@@ -33,7 +35,7 @@ export function QRDisplay({ poll, onBack }: QRDisplayProps) {
 
   const generateQR = async () => {
     try {
-      const token = generateTotpPublic(poll.secretKey, 10);
+      const token = generateTotpPublic(poll.secretKey, REFRESH_INTERVAL_SECONDS);
       setCurrentToken(token);
 
       const url = `https://www.porgunc.com/form/${poll.pollId}?token=${token}`;
@@ -58,14 +60,14 @@ export function QRDisplay({ poll, onBack }: QRDisplayProps) {
 
     const interval = setInterval(() => {
       generateQR();
-      setTimeRemaining(10);
-    }, 10000);
+      setTimeRemaining(REFRESH_INTERVAL_SECONDS);
+    }, REFRESH_INTERVAL_SECONDS * 1000);
 
     // Set up countdown timer
     const countdownInterval = setInterval(() => {
       setTimeRemaining((prev) => {
         if (prev <= 1) {
-          return 10;
+          return REFRESH_INTERVAL_SECONDS;
         }
         return prev - 1;
       });
